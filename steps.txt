@@ -65,11 +65,11 @@ node enrollUser.js 'User1@org1.example.com' 'User1@org1.example.com' userpw
 
 Using User1 credentials create account acc1:
 
-node submitTransaction.js 'User@org1.example.com' initAccount acc1 100
+node submitTransaction.js 'User1@org1.example.com' initAccount acc1 100
 
 To check the balance:
 
-node submitTransaction.js 'User@org1.example.com' listAccounts
+node submitTransaction.js 'User1@org1.example.com' listAccounts
 
 To register and enroll User2:
 
