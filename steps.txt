@@ -87,4 +87,4 @@ node submitTransaction.js 'User2@org1.example.com' listAccounts
 
 Now transfer 50 from acc2 to acc1:
 
-node submitTransaction.js 'User2@org1.example.com' transfer acc2 acc 50
+node submitTransaction.js 'User2@org1.example.com' transfer acc2 acc1 50
