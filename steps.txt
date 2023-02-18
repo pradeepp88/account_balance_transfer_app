@@ -53,6 +53,8 @@ Part 2: Using Fabric Application Gateway, Wallets to interact with Chaincode
 
 cd balance_transfer_app
 
+node enrollUser.js 'CAAdmin@org1.example.com' admin adminpw
+
 node registerUser.js 'CAAdmin@org1.example.com' 'User@org1.example.com' '{"secret": "userpw"}'
 
 node enrollUser.js 'User@org1.example.com' 'User@org1.example.com' userpw
