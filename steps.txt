@@ -53,12 +53,38 @@ Part 2: Using Fabric Application Gateway, Wallets to interact with Chaincode
 
 cd balance_transfer_app
 
+First you have to enroll the admin user:
+
 node enrollUser.js 'CAAdmin@org1.example.com' admin adminpw
 
-node registerUser.js 'CAAdmin@org1.example.com' 'User@org1.example.com' '{"secret": "userpw"}'
+Then register user as follows:
 
-node enrollUser.js 'User@org1.example.com' 'User@org1.example.com' userpw
+node registerUser.js 'CAAdmin@org1.example.com' 'User1@org1.example.com' '{"secret": "userpw"}'
 
-node submitTransaction.js 'User@org1.example.com' initAccount acc 100
+node enrollUser.js 'User1@org1.example.com' 'User1@org1.example.com' userpw
+
+Using User1 credentials create account acc1:
+
+node submitTransaction.js 'User@org1.example.com' initAccount acc1 100
+
+To check the balance:
 
 node submitTransaction.js 'User@org1.example.com' listAccounts
+
+To register and enroll User2:
+
+node registerUser.js 'CAAdmin@org1.example.com' 'User2@org1.example.com' '{"secret": "userpw2"}'
+
+node enrollUser.js 'User2@org1.example.com' 'User2@org1.example.com' userpw
+
+Using User 2 create acc2:
+
+node submitTransaction.js 'User2@org1.example.com' initAccount acc2 200
+
+Get Account Balance:
+
+node submitTransaction.js 'User2@org1.example.com' listAccounts
+
+Now transfer 50 from acc2 to acc1:
+
+node submitTransaction.js 'User2@org1.example.com' transfer acc2 acc 50
