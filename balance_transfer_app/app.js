@@ -40,7 +40,10 @@ app.get("/submitTx", async (request, response) => {
 
         const identityLabel = request.query.identity;
         const functionName = request.query.function;
-        const chaincodeArgs = [ request.query.from, request.query.to, request.query.amount ];
+        var chaincodeArgs = [];
+        if (functionName == 'transfer') { 
+            var chaincodeArgs = [ request.query.from, request.query.to, request.query.amount ];
+        } 
 
         const orgName = identityLabel.split('@')[1];
         const orgNameWithoutDomain = orgName.split('.')[0];
@@ -68,18 +71,20 @@ app.get("/submitTx", async (request, response) => {
         const contract = network.getContract('balance_transfer');
 
         console.log('Submit ' + functionName + ' transaction.');
-        const response = await contract.submitTransaction(functionName, ...chaincodeArgs);
-        if (`${response}` !== '') {
-            console.log(`Response from ${functionName}: ${response}`);
+        const res = await contract.submitTransaction(functionName, ...chaincodeArgs);
+        if (`${res}` !== '') {
+            console.log(`Response from ${functionName}: ${res}`);
+            response.send(res);
+        } else {
+        response.send("Transaction Submitted Successfully");
         }
-
     } catch (error) {
         console.log(`Error processing transaction. ${error}`);
         console.log(error.stack);
+        response.send("Error submitting transaction, please check inputs");
     } finally {
         console.log('Disconnect from the gateway.');
         gateway.disconnect();
-        response.send("Transaction Submitted Successfully")
     }
 
 })
