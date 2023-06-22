@@ -74,7 +74,8 @@ app.get("/submitTx", async (request, response) => {
         const res = await contract.submitTransaction(functionName, ...chaincodeArgs);
         if (`${res}` !== '') {
             console.log(`Response from ${functionName}: ${res}`);
-            response.send(res);
+            var json = JSON.stringify(res.toString());
+            response.send(json);
         } else {
         response.send("Transaction Submitted Successfully");
         }
